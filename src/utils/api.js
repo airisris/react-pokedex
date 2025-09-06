@@ -8,18 +8,17 @@ const API_URL = "http://localhost:5123/";
     - API call may include query parameters for search and type.
 */
 export async function fetchPokemons(type, search) {
-  const response = await axios.get(
-    API_URL +
-      "pokemons?type=" +
-      (type === "all" ? "" : type) +
-      (search === "" ? "" : "&search=" + search)
-  );
-  console.log(
-    API_URL +
-      "pokemons" +
-      (type === "all" ? "" : "?type=" + type) +
-      (search === "" ? "" : "&search=" + search)
-  );
+  let url = API_URL + "pokemons";
+  if (type !== "all" && search !== "") {
+    url += "?type=" + type + "&search=" + search;
+  } else if (type !== "all") {
+    url += "?type=" + type;
+  } else if (search !== "") {
+    url += "?search=" + search;
+  }
+
+  const response = await axios.get(url);
+  console.log(url);
   return response.data;
 }
 
