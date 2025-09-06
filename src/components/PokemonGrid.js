@@ -14,7 +14,7 @@ function PokemonGrid(props) {
         <h3>No pokemons found.</h3>
       ) : (
         pokemons.map((p) => (
-          <div className="pokemon-card">
+          <div className="pokemon-card" key={p.name}>
             <h3>{p.name}</h3>
             <div>Type: {p.type}</div>
             <div>Level: {p.level}</div>
